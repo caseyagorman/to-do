@@ -29,13 +29,12 @@ function render() {
                                 { this.props.tasks.map((task, i) => {
                                     return <div key={i} className="component_1-rectangle-1" >
                                         <div className="component_1-0-0-0-1-0-0-0-0-0"  >
-                                        
+                                        <div onClick={()=> this.props.displayDescription(task)}>
                                             <div className="component_1-text-2">{ task.title }</div>
-                                        </div>
-                                        {/* <div>{this.props.detailsDisplaying !== false && (
-                                            <div> {task.description}</div>
-                                    )}</div> */}
-                                    <div onClick={()=> this.props.displayDetails(task)}></div>
+                                    
+                                            <div> {this.props.description}</div>
+                                       </div>
+                                    </div>
                                     </div>
                                   
                                 })}

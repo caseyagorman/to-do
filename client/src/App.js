@@ -38,13 +38,13 @@ class App extends Component {
           newTaskTitle: "",
           newTaskDescription: "",
           newText: "Add task",
-          detailsDisplaying: false
+          description: ""
       }
 
       this.displayForm = this.displayForm.bind(this)
       this.addNewTask = this.addNewTask.bind(this);
       this.handleChange = this.handleChange.bind(this)
-      this.displayDetails = this.displayDetails.bind(this)
+      this.displayDescription = this.displayDescription.bind(this)
 
   }
 
@@ -84,14 +84,22 @@ class App extends Component {
         })
    
   }
-  displayDetails(task) {
-      console.log(task.description)
-    return <div>{task.description}</div>
-    //   const newState = this.state.detailsDisplaying === false? true: false
-    //   this.setState({
-    //       detailsDisplaying: newState
-    //   })
-  }
+//   displayDetails(task) {
+//     const newState = this.state.detailsDisplaying === false? true: false
+    
+
+//       this.setState({
+//           detailsDisplaying: newState
+//       })
+  
+//   }
+
+displayDescription(task) {
+    const newState = this.state.description === "" ? task.description: ""
+          this.setState({
+          description: newState
+      })
+}
   deleteTask(){
 
   }
@@ -105,10 +113,10 @@ handleChange(event){
       console.log(this.state)
     return (
     <PagedrawComponent1 
-        displayDetails = {this.displayDetails}
+        displayDescription = {this.displayDescription}
         text = {this.state.newText}
         formDisplaying={this.state.formDisplaying}
-        detailsDisplaying={this.state.detailsDisplaying}
+        description={this.state.description}
         handleChange= {this.handleChange} 
         addNewTask={this.addNewTask}  
         tasks={this.state.tasks} 
