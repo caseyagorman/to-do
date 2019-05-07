@@ -11,12 +11,12 @@ function render() {
                         <div className="component_1-0-0-0-0-0">
                             <div onClick={this.props.displayForm} className="component_1-rectangle_2">
                                 <div className="component_1-0-0-0-0-0-0-0">
-                                {console.log("text", this.props.text)}
                                     <div className="component_1-text_2">{this.props.text}</div> </div> </div>
                                     <div>{this.props.formDisplaying !== false && (
                                         <form onSubmit={this.props.addNewTask}>
-                                        <input onChange={this.props.handleChange} type="text" name="newTask"/>
-                                        <button type="submit" name="submit">Add!</button>
+                                        <input onChange={this.props.handleChange} type="text" name="newTaskTitle"/>
+                                        <input onChange={this.props.handleChange} type="text" name="newTaskDescription" />
+                                        <button type="submit" name="submit">Submit</button>
                                     </form>
                                     )}
                                 </div>
@@ -27,13 +27,18 @@ function render() {
                         <div className="component_1-0-0-0-1-0">
                             <div className="component_1-0-0-0-1-0-0">
                                 { this.props.tasks.map((task, i) => {
-                                    return <div key={i} className="component_1-rectangle-1">
-                                        <div className="component_1-0-0-0-1-0-0-0-0-0">
+                                    return <div key={i} className="component_1-rectangle-1" >
+                                        <div className="component_1-0-0-0-1-0-0-0-0-0"  >
                                         
-                                            <div className="component_1-text-2" >{ task.title }</div>
+                                            <div className="component_1-text-2">{ task.title }</div>
                                         </div>
-                                    </div>;
-                                }) }
+                                        {/* <div>{this.props.detailsDisplaying !== false && (
+                                            <div> {task.description}</div>
+                                    )}</div> */}
+                                    <div onClick={()=> this.props.displayDetails(task)}></div>
+                                    </div>
+                                  
+                                })}
                             </div>
                         </div>
                     </div>
