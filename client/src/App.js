@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import PagedrawComponent1 from './pagedraw/component_1';
+// import PagedrawComponent1 from './pagedraw/component_1';
 import $ from 'jquery';
+import NewTaskForm from './NewTaskForm'
+import TodoItem from './TodoItem'
 
 const tasksURI = 'http://localhost:5000/todo/api/v1.0/tasks';
 const ajax = function(uri, method, data) {
@@ -38,13 +40,13 @@ class App extends Component {
           newTaskTitle: "",
           newTaskDescription: "",
           newText: "Add task",
-          description: ""
       }
 
       this.displayForm = this.displayForm.bind(this)
       this.addNewTask = this.addNewTask.bind(this);
       this.handleChange = this.handleChange.bind(this)
-      this.displayDescription = this.displayDescription.bind(this)
+      this.deleteTodo = this.deleteTodo.bind(this)
+
 
   }
 
@@ -60,10 +62,9 @@ class App extends Component {
           "title": this.state.newTaskTitle,
           "description": this.state.newTaskDescription
       }
-
         event.target.reset()
-      addTask(newTask, (data) => {
-          this.setState({tasks: [].concat(this.state.tasks, [data.task])});
+        addTask(newTask, (data) => {
+        this.setState({tasks: [].concat(this.state.tasks, [data.task])});
       });
   }
 
@@ -84,25 +85,10 @@ class App extends Component {
         })
    
   }
-//   displayDetails(task) {
-//     const newState = this.state.detailsDisplaying === false? true: false
-    
+deleteTodo(task){
+    console.log(task)
 
-//       this.setState({
-//           detailsDisplaying: newState
-//       })
-  
-//   }
-
-displayDescription(task) {
-    const newState = this.state.description === "" ? task.description: ""
-          this.setState({
-          description: newState
-      })
 }
-  deleteTask(){
-
-  }
 
 
 handleChange(event){
@@ -112,16 +98,16 @@ handleChange(event){
   render() {
       console.log(this.state)
     return (
-    <PagedrawComponent1 
-        displayDescription = {this.displayDescription}
-        text = {this.state.newText}
-        formDisplaying={this.state.formDisplaying}
-        description={this.state.description}
-        handleChange= {this.handleChange} 
-        addNewTask={this.addNewTask}  
-        tasks={this.state.tasks} 
-        displayForm={this.displayForm} 
-        addNewTask={this.addNewTask} />
+        <div>
+        <NewTaskForm displayForm={this.displayForm} 
+                     text={this.state.newText} 
+                     handleChange={this.handleChange}
+                     addNewTask={this.addNewTask}
+                     formDisplaying={this.state.formDisplaying}/>
+        {this.state.tasks.map((task) => {
+            return <TodoItem task={task} deleteTodo={this.deleteTodo}/> 
+            })}
+        </div>
     )
   }
 }
